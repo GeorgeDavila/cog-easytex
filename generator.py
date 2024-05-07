@@ -83,7 +83,7 @@ def generate_document_from_string(doc, formattingString:str):
         generatedLines.append(codeString)
 
     generatedCodeString = "\n\t".join(generatedLines) #tab join for incorporation into fill_document function
-    generatedCodeString = "def fill_document(doc):" + generatedCodeString
+    generatedCodeString = "def fill_document(doc):\n\t" + generatedCodeString
 
     generatedCodeString = importsString + generatedCodeString
     

@@ -3,6 +3,7 @@ from pylatex.utils import italic, NoEscape
 from pylatex.section import Chapter, Paragraph, Subparagraph
 
 def fill_document(doc):
+	
 	doc.append( NoEscape("hello") )
 	
 	with doc.create(Chapter("AAA")):
