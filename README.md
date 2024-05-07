@@ -9,3 +9,7 @@ Yes there's this or that program, X Y and Z online platform and whatnot but you 
 
 ## how it works
 Take the very hackish approach of rewriting the document fill function code itself be rewriting file `builtFillFunc.py`. (Simple eval of the code string currently producing errors so we go with this approach). 
+
+### References 
+
+https://github.com/JelteF/PyLaTeX/issues/261#issuecomment-499619565 - require these extra packages to built chapters

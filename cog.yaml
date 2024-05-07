@@ -1,12 +1,12 @@
 # Configuration for Cog
 build:
-  gpu: true
+  gpu: false
   python_version: "3.10"
   python_packages:
     - "pylatex"
 
   run:
-    - apt-get update && apt-get install -y git-lfs texlive-pictures texlive-science texlive-latex-extra latexmk
+    - apt-get update && apt-get install -y git-lfs texlive-pictures texlive-science texlive-latex-extra latexmk texlive-fonts-recommended texlive-latex-extra
     - git lfs install
     - mkdir outputs
 

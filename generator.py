@@ -120,12 +120,12 @@ bye
 22
 '''
 
-if __name__ == '__main__':
-    # Basic document
-    doc = Document('basic')
-    generate_document_from_string(doc, test1)
-
-    from builtFillFunc import *
-    fill_document(doc)
-
-    doc.generate_tex()
+#if __name__ == '__main__':
+#    # Basic document
+#    doc = Document('basic')
+#    generate_document_from_string(doc, test1)
+#
+#    from builtFillFunc import *
+#    fill_document(doc)
+#
+#    doc.generate_tex()
