@@ -61,5 +61,5 @@ class Predictor(BasePredictor):
 
         #zipOutputDirectory(outputDirectory, zipOutName)
 
-        output_paths = Path(f"{documentName}.pdf") , Path(f"{documentName}.tex")
+        output_paths = Path(f"{documentName}.pdf") #, Path(f"{documentName}.tex")
         return output_paths
