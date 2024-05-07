@@ -35,17 +35,17 @@ class Predictor(BasePredictor):
         self,
         bodyInput: str = Input(
             description="Text", 
-            default="#CHAPTER A \n #SECTION B \n Lorem ipsum...",
+            default="#SECTION A \n Hello \n #SUBSECTION B \n Lorem ipsum...",
             ),
         #userFile: Path = Input(
         #    description="Upload a tex file",
         #    ),
-    ) -> str:
+    ) -> Path:
         """Run a single prediction on the model"""
 
         documentName = "generated"
         outputDirectory = "outputs"
-        zipOutName = "output.zip"
+        zipOutName = "outputs.zip"
 
         doc = Document(documentName)
         generate_document_from_string(doc, bodyInput)
@@ -56,10 +56,10 @@ class Predictor(BasePredictor):
         doc.generate_pdf(clean_tex=False)
         doc.generate_tex()
 
-        shutil.copy(f"{documentName}.tex", outputDirectory)
-        shutil.copy(f"{documentName}.pdf", outputDirectory)
+        #shutil.move(f"{documentName}.tex", f"{outputDirectory}/{documentName}.tex")
+        #shutil.move(f"{documentName}.pdf", f"{outputDirectory}/{documentName}.pdf")
 
-        zipOutputDirectory(outputDirectory, zipOutName)
+        #zipOutputDirectory(outputDirectory, zipOutName)
 
-        output_path = Path(f"output.zip")
-        return output_path
+        output_paths = Path(f"{documentName}.pdf") , Path(f"{documentName}.tex")
+        return output_paths

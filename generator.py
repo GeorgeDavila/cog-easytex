@@ -30,19 +30,19 @@ def generate_document_from_string(doc, formattingString:str):
 
     #we use sectionLevel to control indentation level per pylatex structure 
     for i in linesList:
-        if "#CHAPTER" in i:
-            sectionLevel = 1
-            title = i.replace("#CHAPTER", "")
-            while (title[0] == " "):
-                title = title[1:]
-            
-            tabIndentationLevel = "\t"*(sectionLevel - 1)
-            createType = "Chapter"
-            codeString = f"{tabIndentationLevel}with doc.create({createType}(\"{title}\")):"
-            generatedLines.append(codeString)
-            continue #format disallows something else being on same line
+        #if "#CHAPTER" in i:
+        #    sectionLevel = 1
+        #    title = i.replace("#CHAPTER", "")
+        #    while (title[0] == " "):
+        #        title = title[1:]
+        #    
+        #    tabIndentationLevel = "\t"*(sectionLevel - 1)
+        #    createType = "Chapter"
+        #    codeString = f"{tabIndentationLevel}with doc.create({createType}(\"{title}\")):"
+        #    generatedLines.append(codeString)
+        #    continue #format disallows something else being on same line
         if "#SECTION" in i:
-            sectionLevel = 2
+            sectionLevel = 1 #2
             title = i.replace("#SECTION", "")
             while (title[0] == " "):
                 title = title[1:]
@@ -53,7 +53,7 @@ def generate_document_from_string(doc, formattingString:str):
             generatedLines.append(codeString)
             continue #format disallows something else being on same line
         if "#SUBSECTION" in i:
-            sectionLevel = 3
+            sectionLevel = 2 #3
             title = i.replace("#SUBSECTION", "")
             while (title[0] == " "):
                 title = title[1:]
@@ -64,7 +64,7 @@ def generate_document_from_string(doc, formattingString:str):
             generatedLines.append(codeString)
             continue #format disallows something else being on same line
         if "#SUBSUBSECTION" in i:
-            sectionLevel = 4
+            sectionLevel = 3 #4
             title = i.replace("#SUBSUBSECTION", "")
             while (title[0] == " "):
                 title = title[1:]
