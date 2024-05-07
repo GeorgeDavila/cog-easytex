@@ -3,6 +3,8 @@
 
 from cog import BasePredictor, Input, Path
 import os
+import shutil
+from zipfile import ZipFile
 from pylatex import Document, Section, Subsection, Subsubsection, Command
 from pylatex.utils import italic, NoEscape
 from pylatex.section import Chapter, Paragraph, Subparagraph
@@ -42,6 +44,9 @@ class Predictor(BasePredictor):
         """Run a single prediction on the model"""
 
         documentName = "generated"
+        outputDirectory = "outputs"
+        zipOutName = "output.zip"
+
         doc = Document(documentName)
         generate_document_from_string(doc, bodyInput)
 
@@ -51,5 +56,10 @@ class Predictor(BasePredictor):
         doc.generate_pdf(clean_tex=False)
         doc.generate_tex()
 
-        output_path = Path(f"{documentName}.pdf")
+        shutil.copy(f"{documentName}.tex", outputDirectory)
+        shutil.copy(f"{documentName}.pdf", outputDirectory)
+
+        zipOutputDirectory(outputDirectory, zipOutName)
+
+        output_path = Path(f"output.zip")
         return output_path

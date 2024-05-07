@@ -8,6 +8,7 @@ build:
   run:
     - apt-get update && apt-get install -y git-lfs texlive-pictures texlive-science texlive-latex-extra latexmk
     - git lfs install
+    - mkdir outputs
 
 # predict.py defines how predictions are run on your model
 predict: "predict.py:Predictor"
