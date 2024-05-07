@@ -3,7 +3,7 @@ from pylatex.utils import italic, NoEscape
 from pylatex.section import Chapter, Paragraph, Subparagraph
 
 
-def generate_codestring(formattingString:str):
+def generate_document_from_string(doc, formattingString:str):
     """Add a section, a subsection and some text to the document.
 
     :param doc: the document
@@ -14,6 +14,11 @@ def generate_codestring(formattingString:str):
     #split into list of lines - for txt file input we can just use readlines()
     linesList = formattingString.splitlines() 
     print(linesList)
+
+    #for i in range(len(linesList)):
+    #    if linesList[i] == "":
+    #        linesList = "\n"
+
 
     generatedLines = []
     sectionLevel = 0
@@ -27,7 +32,7 @@ def generate_codestring(formattingString:str):
                 title = title[1:]
             
             createType = "Chapter"
-            codeString = f"with doc.create({createType}({title})):"
+            codeString = f"with doc.create({createType}(\"{title}\")):"
             generatedLines.append(codeString)
             continue #format disallows something else being on same line
         if "#SECTION" in i:
@@ -37,7 +42,7 @@ def generate_codestring(formattingString:str):
                 title = title[1:]
             
             createType = "Section"
-            codeString = f"with doc.create({createType}({title})):"
+            codeString = f"with doc.create({createType}(\"{title}\")):"
             generatedLines.append(codeString)
             continue #format disallows something else being on same line
         if "#SUBSECTION" in i:
@@ -47,7 +52,7 @@ def generate_codestring(formattingString:str):
                 title = title[1:]
             
             createType = "Subsection"
-            codeString = f"with doc.create({createType}({title})):"
+            codeString = f"with doc.create({createType}(\"{title}\")):"
             generatedLines.append(codeString)
             continue #format disallows something else being on same line
         if "#SUBSUBSECTION" in i:
@@ -57,7 +62,7 @@ def generate_codestring(formattingString:str):
                 title = title[1:]
             
             createType = "Subsubsection"
-            codeString = f"with doc.create({createType}({title})):"
+            codeString = f"with doc.create({createType}(\"{title}\")):"
             generatedLines.append(codeString)
             continue #format disallows something else being on same line
         if i == "":
@@ -65,39 +70,14 @@ def generate_codestring(formattingString:str):
             continue
 
         tabIndentationLevel = "\t"*sectionLevel
-        codeString = f"{tabIndentationLevel}doc.append( NoEscape({i}) )"
+        codeString = f"{tabIndentationLevel}doc.append( NoEscape(\"{i}\") )"
         generatedLines.append(codeString)
 
     generatedCodeString = "\n".join(generatedLines)
     print(generatedCodeString)
 
-    doc = Document('gen')
-    eval(code2run)
-
-    #doc.generate_pdf(clean_tex=False)
-    doc.generate_tex()
-
-    return generatedCodeString
-
     
-
-    #return generatedCodeString
-
-    #documentName = "generated"
-    #doc = Document(documentName)
-    #eval(generatedCodeString)
-    #
-    ##doc.generate_pdf(clean_tex=False)
-    #doc.generate_tex()
-
-def generate_document_from_string(doc, formattingString:str):
-    code2run = generate_codestring(formattingString)
-
-    doc = Document('gen')
-    eval(code2run)
-
-    #doc.generate_pdf(clean_tex=False)
-    doc.generate_tex()
+    return eval(generatedCodeString)
 
 
 
