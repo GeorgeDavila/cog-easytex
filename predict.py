@@ -33,6 +33,26 @@ class Predictor(BasePredictor):
 
     def predict(
         self,
+        useTitle: bool = Input(
+            description="Use a title?", 
+            default=True,
+            ),
+        separateTitlePage: bool = Input(
+            description="Separate the title page?", 
+            default=False,
+            ),
+        titleInput: str = Input(
+            description="Title", 
+            default="Report",
+            ),
+        nameInput: str = Input(
+            description="Name", 
+            default="George",
+            ),
+        dateInput: str = Input(
+            description="Date", 
+            default="May 8th, 2024",
+            ),
         bodyInput: str = Input(
             description="Text", 
             default="#SECTION A \n Hello \n #SUBSECTION B \n Lorem ipsum...",
@@ -48,6 +68,20 @@ class Predictor(BasePredictor):
         zipOutName = "outputs.zip"
 
         doc = Document(documentName)
+        if (useTitle):
+            #remove newlines
+            titleInput = titleInput.replace("\n", "")
+            nameInput = nameInput.replace("\n", "")
+            dateInput = dateInput.replace("\n", "")
+
+            doc.preamble.append(Command( 'title', titleInput ))
+            doc.preamble.append(Command( 'author', nameInput ))
+            doc.preamble.append(Command( 'date', dateInput )) #other format used NoEscape(r'\today') but date on server may differe from user's date
+            doc.append(NoEscape(r'\maketitle'))
+
+        if (useTitle) and (separateTitlePage):
+            doc.append(NoEscape(r'\newpage'))
+        
         generate_document_from_string(doc, bodyInput)
 
         from builtFillFunc import fill_document
