@@ -1,5 +1,8 @@
 .cog
 
+#we generate this ptython file in generator then use it to make the TeX, so gitignore generated script
+builtFillFunc.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
