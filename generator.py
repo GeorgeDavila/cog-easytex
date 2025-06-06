@@ -41,9 +41,9 @@ def generate_document_from_string(doc, formattingString:str):
         #    codeString = f"{tabIndentationLevel}with doc.create({createType}(\"{title}\")):"
         #    generatedLines.append(codeString)
         #    continue #format disallows something else being on same line
-        if "#SECTION" in i:
+        if "#" in i:
             sectionLevel = 1 #2
-            title = i.replace("#SECTION", "")
+            title = i.replace("#", "")
             while (title[0] == " "):
                 title = title[1:]
             
@@ -52,9 +52,9 @@ def generate_document_from_string(doc, formattingString:str):
             codeString = f"{tabIndentationLevel}with doc.create({createType}(\"{title}\")):"
             generatedLines.append(codeString)
             continue #format disallows something else being on same line
-        if "#SUBSECTION" in i:
+        if "##" in i:
             sectionLevel = 2 #3
-            title = i.replace("#SUBSECTION", "")
+            title = i.replace("##", "")
             while (title[0] == " "):
                 title = title[1:]
             
@@ -63,9 +63,9 @@ def generate_document_from_string(doc, formattingString:str):
             codeString = f"{tabIndentationLevel}with doc.create({createType}(\"{title}\")):"
             generatedLines.append(codeString)
             continue #format disallows something else being on same line
-        if "#SUBSUBSECTION" in i:
+        if "###" in i:
             sectionLevel = 3 #4
-            title = i.replace("#SUBSUBSECTION", "")
+            title = i.replace("###", "")
             while (title[0] == " "):
                 title = title[1:]
             
@@ -101,22 +101,22 @@ test1 = '''
 hello
 
 #CHAPTER AAA
-#SECTION ab
+# ab
 bye
-#SECTION cd
+# cd
 0
 1
 2
 3
 
 #CHAPTER BBB
-#SECTION ef
+# ef
 bye
-#SUBSECTION gh
+## gh
 0
-#SUBSUBSECTION ij
+### ij
 11
-#SUBSECTION kl
+## kl
 22
 '''
 
